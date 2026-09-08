@@ -1,1 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voltaris Motors | O Futuro da Mobilidade Elétrica</title>
+    <!-- Fonte Inter para alta legibilidade -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. VARIÁVEIS DE TEMA (CLARO / ESCURO / ALTO CONTRASTE)
+           ========================================================================== */
+        :root {
+            /* Modo Escuro (Padrão) */
+            --bg-color: #0b0f19;
+            --surface-color: #151c2c;
+            --surface-border: #2a3447;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary-color: #00f2fe;
+            --primary-hover: #4facfe;
+            --accent-color: #38ef7d;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            --focus-outline: 3px solid #00f2fe;
+            --font-scale: 1;
+        }
 
+        [data-theme="light"] {
+            /* Modo Claro */
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --surface-border: #e2e8f0;
+            --text-color: #0f172a;
+            --text-muted: #475569;
+            --primary-color: #0284c7;
+            --primary-hover: #0369a1;
+            --accent-color: #15803d;
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            --focus-outline: 3px solid #0284c7;
+        }
+
+        [data-high-contrast="true"] {
+            /* Modo Alto Contraste para Baixa Visão */
+            --bg-color: #000000 !important;
+            --surface-color: #000000 !important;
+            --surface-border: #ffffff !important;
+            --text-color: #ffff00 !important; /* Texto Amarelo no Fundo Preto */
+            --text-muted: #ffffff !important;
+            --primary-color: #00ffff !important;
+            --primary-hover: #ffff00 !important;
+            --accent-color: #00ff00 !important;
+            --focus-outline: 4px solid #ffffff !important;
+        }
+
+        /* ==========================================================================
+           2. ESTILOS GERAIS E ACESSIBILIDADE DE FONTE
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        html {
+            font-size: calc(16px * var(--font-scale));
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Indicador de Foco Acessível para Navegação via Teclado */
+        :focus-visible {
+            outline: var(--focus-outline);
+            outline-offset: 4px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Botões Padrão */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid transparent;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: #000000;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-color);
+            border-color: var(--surface-border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* ==========================================================================
+           3. BARRA DE ACESSIBILIDADE FIXA (TOP)
+           ========================================================================== */
+        .accessibility-bar {
+            background-color: #000;
+            color: #fff;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .accessibility-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .acc-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .acc-btn {
+            background: #222;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .acc-btn:hover {
+            background: #444;
+        }
+
+        /* ==========================================================================
+           4. CABEÇALHO / NAVEGAÇÃO
+           ========================================================================== */
+        header {
+            background-color: var(--surface-color);
+            border-bottom: 1px solid var(--surface-border);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* ==========================================================================
+           5. HERO SECTION
+           ========================================================================== */
+        .hero {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(180deg, var(--surface-color) 0%, var(--bg-color) 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* ==========================================================================
+           6. VITRINE DE MODELOS (CARDS)
+           ========================================================================== */
+        .models-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .grid-models {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card-car {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-car img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-category {
+            font-size: 0.875rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--surface-border);
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .spec-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .card-body .btn {
+            margin-top: auto;
+        }
+
+        /* ==========================================================================
+           7. FORMULÁRIO DE TEST-DRIVE (ACESSÍVEL)
+           ========================================================================== */
+        .contact-section {
+            background-color: var(--surface-color);
+            border-top: 1px solid var(--surface-border);
+            padding: 4rem 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.875rem;
+            border-radius: 6px;
+            border: 2px solid var(--surface-border);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+        }
+
+        .form-help {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* ==========================================================================
+           8. RODAPÉ
+           ========================================================================== */
+        footer {
+            background-color: var(--bg-color);
+            border-top: 1px solid var(--surface-border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; } /* Simplificação mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE ACESSIBILIDADE FIXA -->
+    <div class="accessibility-bar" role="region" aria-label="Ferramentas de Acessibilidade">
+        <div class="container">
+            <span><strong>Acessibilidade Voltaris:</strong></span>
+            <div class="acc-controls">
+                <button class="acc-btn" onclick="adjustFontSize(0.1)" aria-label="Aumentar tamanho do texto">A+</button>
+                <button class="acc-btn" onclick="adjustFontSize(-0.1)" aria-label="Diminuir tamanho do texto">A-</button>
+                <button class="acc-btn" onclick="resetFontSize()" aria-label="Restaurar tamanho do texto original">A Normal</button>
+                <button class="acc-btn" onclick="toggleHighContrast()" aria-label="Alternar modo de alto contraste para baixa visão">Alto Contraste</button>
+                <button class="acc-btn" onclick="toggleTheme()" id="theme-toggle-btn" aria-label="Alternar entre modo claro e escuro">Modo Claro/Escuro</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CABEÇALHO -->
+    <header role="banner">
+        <div class="container">
+            <nav role="navigation" aria-label="Navegação Principal">
+                <a href="#" class="logo" aria-label="Voltaris Motors Página Inicial">
+                    ⚡ VOLTARIS <span>MOTORS</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#modelos">Modelos</a></li>
+                    <li><a href="#tecnologia">Tecnologia</a></li>
+                    <li><a href="#testdrive">Agendar Test-Drive</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main id="main-content">
+        
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="container">
+                <h1>O Futuro É Elétrico. O Futuro É Voltaris.</h1>
+                <p>Projetados do zero para entregar máxima autonomia, sustentabilidade e alta performance sem emissões de carbono.</p>
+                <a href="#modelos" class="btn btn-primary">Conheça Nossos Veículos</a>
+            </div>
+        </section>
+
+        <!-- VITRINE DE CARROS -->
+        <section id="modelos" class="models-section">
+            <div class="container">
+                <h2 class="section-title">Modelos Exclusivos</h2>
+                
+                <div class="grid-models">
+
+                    <!-- MODELO 1 -->
+                    <article class="card-car">
+                        <!-- Imagem com ALT descritivo detalhado para leitores de tela e baixa visão -->
+                        <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80" 
+                             alt="Fotografia do Voltaris Model S: Um sedan elétrico esportivo prata metálico estático em uma rodovia moderna ao pôr do sol.">
+                        <div class="card-body">
+                            <span class="card-category">Sedan Esportivo</span>
+                            <h3 class="card-title">Voltaris Model S</h3>
+                            <p>Elegância aerodinâmica com o mais avançado sistema de condução autônoma do mercado.</p>
+                            
+                            <div class="specs-grid" aria-label="Especificações do Voltaris Model S">
+                                <div class="spec-item">
+                                    <span class="spec-label">Autonomia</span>
+                                    <span class="spec-value">620 km</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">0 a 100 km/h</span>
+                                    <span class="spec-value">3.2 seg</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Potência</span>
+                                    <span class="spec-value">500 cv</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Recarga Rápida</span>
+                                    <span class="spec-value">20 min (80%)</span>
+                                </div>
+                            </div>
+
+                            <div class="price-tag">R$ 389.000</div>
+                            <a href="#testdrive" class="btn btn-outline" aria-label="Reservar ou agendar test-drive para o Voltaris Model S">Agendar Test-Drive</a>
+                        </div>
+                    </article>
+
+                    <!-- MODELO 2 -->
+                    <article class="card-car">
+                        <img src="https://images.unsplash.com/photo-1538392235070-3efb679448df?auto=format&fit=crop&w=800&q=80" 
+                             alt="Fotografia do Voltaris X-Cross: Um SUV elétrico futurista na cor cinza chumbo estacionado em frente a uma arquitetura moderna.">
+                        <div class="card-body">
+                            <span class="card-category">SUV Familiar Off-Road</span>
+                            <h3 class="card-title">Voltaris X-Cross</h3>
+                            <p>Espaço interno revolucionário para até 7 passageiros e tração integral inteligente nas quatro rodas.</p>
+                            
+                            <div class="specs-grid" aria-label="Especificações do Voltaris X-Cross">
+                                <div class="spec-item">
+                                    <span class="spec-label">Autonomia</span>
+                                    <span class="spec-value">550 km</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">0 a 100 km/h</span>
+                                    <span class="spec-value">4.5 seg</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Potência</span>
+                                    <span class="spec-value">450 cv</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Recarga Rápida</span>
+                                    <span class="spec-value">25 min (80%)</span>
+                                </div>
+                            </div>
+
+                            <div class="price-tag">R$ 429.000</div>
+                            <a href="#testdrive" class="btn btn-outline" aria-label="Reservar ou agendar test-drive para o Voltaris X-Cross">Agendar Test-Drive</a>
+                        </div>
+                    </article>
+
+                    <!-- MODELO 3 -->
+                    <article class="card-car">
+                        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" 
+                             alt="Fotografia do Voltaris Pulse: Um carro elétrico urbano compacto de cor branca brilhante trafegando na cidade.">
+                        <div class="card-body">
+                            <span class="card-category">Compacto Urbano</span>
+                            <h3 class="card-title">Voltaris Pulse</h3>
+                            <p>Agilidade perfeita para a cidade, fácil de estacionar e com custo zero de manutenção preventiva.</p>
+                            
+                            <div class="specs-grid" aria-label="Especificações do Voltaris Pulse">
+                                <div class="spec-item">
+                                    <span class="spec-label">Autonomia</span>
+                                    <span class="spec-value">400 km</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">0 a 100 km/h</span>
+                                    <span class="spec-value">6.8 seg</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Potência</span>
+                                    <span class="spec-value">200 cv</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Recarga Rápida</span>
+                                    <span class="spec-value">15 min (80%)</span>
+                                </div>
+                            </div>
+
+                            <div class="price-tag">R$ 199.000</div>
+                            <a href="#testdrive" class="btn btn-outline" aria-label="Reservar ou agendar test-drive para o Voltaris Pulse">Agendar Test-Drive</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMULÁRIO DE TEST DRIVE ACESSÍVEL -->
+        <section id="testdrive" class="contact-section">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="section-title">Agende seu Test-Drive</h2>
+                    <form onsubmit="handleFormSubmit(event)">
+                        
+                        <div class="form-group">
+                            <label for="nome">Nome Completo (Obrigatório)</label>
+                            <input type="text" id="nome" class="form-control" required aria-required="true" placeholder="Ex: João da Silva">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail de Contato (Obrigatório)</label>
+                            <input type="email" id="email" class="form-control" required aria-required="true" placeholder="seuemail@exemplo.com">
+                            <div class="form-help">Enviaremos a confirmação do agendamento para este e-mail.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modelo-select">Escolha o Modelo de Interesse</label>
+                            <select id="modelo-select" class="form-control" required aria-required="true">
+                                <option value="">-- Selecione um Veículo --</option>
+                                <option value="Model S">Voltaris Model S (Sedan)</option>
+                                <option value="X-Cross">Voltaris X-Cross (SUV)</option>
+                                <option value="Pulse">Voltaris Pulse (Urbano)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Solicitar Agendamento</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer role="contentinfo">
+        <div class="container">
+            <p>&copy; 2026 Voltaris Motors. Todos os direitos reservados.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem;">Desenvolvido com foco total em acessibilidade web (WCAG 2.1).</p>
+        </div>
+    </footer>
+
+    <!-- LÓGICA DE JAVASCRIPT (TEMA, ACESSIBILIDADE E INTERAÇÃO) -->
+    <script>
+        // 1. Controle de Tamanho da Fonte
+        let currentScale = 1.0;
+        
+        function adjustFontSize(delta) {
+            currentScale += delta;
+            if (currentScale < 0.8) currentScale = 0.8;
+            if (currentScale > 1.5) currentScale = 1.5;
+            document.documentElement.style.setProperty('--font-scale', currentScale);
+        }
+
+        function resetFontSize() {
+            currentScale = 1.0;
+            document.documentElement.style.setProperty('--font-scale', currentScale);
+        }
+
+        // 2. Controle de Tema (Claro / Escuro)
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            // Desativa alto contraste ao alternar tema comum
+            document.documentElement.removeAttribute('data-high-contrast');
+            
+            if (currentTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        }
+
+        // 3. Controle de Alto Contraste (Para Baixa Visão)
+        function toggleHighContrast() {
+            const isHighContrast = document.documentElement.getAttribute('data-high-contrast');
+            if (isHighContrast === 'true') {
+                document.documentElement.removeAttribute('data-high-contrast');
+            } else {
+                document.documentElement.setAttribute('data-high-contrast', 'true');
+            }
+        }
+
+        // 4. Submissão do Formulário
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const modelo = document.getElementById('modelo-select').value;
+            
+            alert(`Obrigado, ${nome}! Solicitação de Test-Drive para o modelo ${modelo} recebida com sucesso. Nossa equipe entrará em contato.`);
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
